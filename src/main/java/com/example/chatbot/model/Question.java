@@ -19,14 +19,6 @@ public class Question {
     @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
     private Answer answer;
 
-    // Constructor
-    public Question(Long id, String question, Category category, Answer answer) {
-        this.id = id;
-        this.question = question;
-        this.category = category;
-        this.answer = answer;
-    }
-
     // Getters & Setters
     public Long getId() {
         return id;
@@ -42,5 +34,21 @@ public class Question {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 }

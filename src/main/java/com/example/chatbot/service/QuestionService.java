@@ -16,7 +16,7 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public List<Question> getQuestionByCategory(Long category_id) {
+    public List<Question> getQuestionsByCategory(Long category_id) {
         return questionRepository.findByCategoryId(category_id);
     }
 

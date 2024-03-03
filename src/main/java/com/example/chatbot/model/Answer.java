@@ -32,4 +32,12 @@ public class Answer {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 }
