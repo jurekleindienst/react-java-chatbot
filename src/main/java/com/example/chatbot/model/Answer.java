@@ -1,5 +1,6 @@
 package com.example.chatbot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,7 @@ public class Answer {
 
     @OneToOne
     @JoinColumn(name = "question_id")
+    @JsonIgnore
     private Question question;
 
     // Getters & Setters

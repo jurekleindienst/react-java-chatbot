@@ -1,5 +1,6 @@
 package com.example.chatbot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +18,7 @@ public class Question {
     private Category category;
 
     @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Answer answer;
 
     // Getters & Setters
