@@ -15,7 +15,7 @@ const CategoryList = ({ onSelectCategory }) => {
             {categories.map((category) => (
                 <button
                     key={category.id}
-                    onClick={() => onSelectCategory(category.id)}>
+                    onClick={() => onSelectCategory(category)}>
                     {category.category}
                 </button>
             ))}

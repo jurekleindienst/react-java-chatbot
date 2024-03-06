@@ -18,7 +18,7 @@ const QuestionList = ({ categoryId, onSelectQuestion }) => {
             {questions.map((question) => (
                 <button
                     key={question.id}
-                    onClick={() => onSelectQuestion(question.id)}>
+                    onClick={() => onSelectQuestion(question)}>
                     {question.question}
                 </button>
             ))}
