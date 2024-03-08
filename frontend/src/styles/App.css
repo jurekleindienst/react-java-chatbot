@@ -1,0 +1,133 @@
+body {
+    background-color: #E0E0E0;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 660px;
+    background-color: #ECE8E5;
+    border-radius: 10px;
+    max-width: calc(100% - 40px);
+    max-height: calc(100% - 40px);
+    margin: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.chat-header {
+    background-color: #FFFFFF;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+/* Chat footer ("Want to ask a different question?", Reset button) */
+.chat-footer {
+    background-color: #FFFFFF;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px;
+}
+
+.reset-button {
+    justify-content: center;
+    align-items: center;
+    display: inline-block;
+    background-color: #F5874F;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-family: Inter, sans-serif;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: calc(100% - 10px);
+}
+
+.reset-button:hover {
+    cursor: pointer;
+    background-color: rgba(245, 135, 79, 0.9);
+    transition: background-color 0.3s
+}
+
+/* Chat */
+.chat {
+    margin: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.greeting {
+    background-color: #FFFFFF;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    border-radius: 20px;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: flex;
+    max-width: fit-content;
+    width: 55%;
+}
+
+/* Buttons for categories, questions */
+.button {
+    justify-content: center;
+    align-items: center;
+    display: inline-block;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    font-family: Inter, sans-serif;
+    border-radius: 20px;
+    border: 2px solid #F5874F;
+    padding: 10px 20px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    transition: background-color 0.3s
+}
+
+.button:hover {
+    background-color: rgba(245, 135, 79, 0.2);
+    cursor: pointer;
+}
+
+/* Chat bubble for user/system */
+.chat-entry {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 10px;
+}
+
+.chat-entry.user {
+    align-items: flex-end;
+}
+
+.message-sender {
+    color: #7a7a7a;
+}
+
+.message-content {
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.message-content p {
+    padding: 15px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+}
+
+.chat-entry.user .message-content p {
+    background-color: #F5874F;
+    color: #FFFFFF;
+}
+
+.message-sender-intro {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    color: #7a7a7a;
+}
