@@ -11,7 +11,7 @@ const CategoryList = ({ onSelectCategory }) => {
     }, []);
 
     return (
-        <div>
+        <div className="button-container">
             {categories.map((category) => (
                 <button
                     className="button"

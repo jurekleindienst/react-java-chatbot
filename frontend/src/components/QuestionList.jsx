@@ -14,7 +14,7 @@ const QuestionList = ({ categoryId, onSelectQuestion }) => {
     }, [categoryId]); // Re-render once category changes
 
     return (
-        <div>
+        <div className="button-container">
             {questions.map((question) => (
                 <button
                     className="button"

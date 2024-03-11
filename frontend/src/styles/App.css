@@ -22,7 +22,7 @@ body {
     border-radius: 10px;
     margin: 20px auto 0;
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
 
     transition: transform 0.5s ease, opacity 0.5s ease;
     opacity: 0;
@@ -52,13 +52,24 @@ body {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: white;
-    border-radius: 100px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background-color: #F5874F;
+    border-radius: 20px 20px 3px 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
     cursor: pointer;
     display: flex;
     align-items: center;
     padding: 10px 20px;
+}
+
+.chat-popup-button:hover {
+    cursor: pointer;
+    background-color: rgba(245, 135, 79, 0.9);
+    transition: background-color 0.3s
+}
+
+.chat-popup-message {
+    color: #FFFFFF;
+    padding: 10px;
 }
 
 /* Header within the chat container (Chatbot name, close button) */
@@ -70,15 +81,15 @@ body {
     background-color: #FFFFFF;
     padding: 10px 20px;
     font-size: 20px;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.05);
 }
 
 .close-chat {
-    font-size: 20px;
+    font-size: 25px;
+    color: #F5874F;
+    background-color: #FFFFFF;
     margin-left: auto;
     border: none;
-    background: #F5874F;
-    color: #FFFFFF;
-    border-radius: 20px;
     cursor: pointer;
 }
 
@@ -112,7 +123,6 @@ body {
 
 /* Chat section (where messages are displayed) */
 .chat {
-    margin: 20px;
     overflow-y: auto;
     flex-grow: 1;
 }
@@ -121,6 +131,7 @@ body {
     background-color: #FFFFFF;
     border-radius: 20px 20px 20px 3px;
     padding: 0 15px;
+    margin-left: 20px;
     margin-bottom: 10px;
     margin-top: 10px;
     display: flex;
@@ -131,6 +142,7 @@ body {
 .instruction {
     background-color: #FFFFFF;
     border-radius: 3px 20px 20px 20px;
+    margin-left: 20px;
     margin-bottom: 10px;
     padding: 0 15px;
     display: flex;
@@ -157,11 +169,17 @@ body {
     cursor: pointer;
 }
 
+.button-container {
+    margin-left: 20px;
+}
+
 /* Chat bubble for user/system messages */
 .chat-entry {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .chat-entry.user {
@@ -198,6 +216,8 @@ body {
 
 /* Introduction text label */
 .message-sender-intro {
+    margin-left: 20px;
+    margin-top: 10px;
     font-family: Inter, sans-serif;
     font-size: 14px;
     color: #7a7a7a;
@@ -220,6 +240,6 @@ body {
 }
 
 .chat-popup-image {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }

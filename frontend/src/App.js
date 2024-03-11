@@ -84,7 +84,8 @@ function App() {
             {/* Button to open chat, only shown if chat is not open */}
             {!isChatOpen && (
                 <div className="chat-popup-button" onClick={openChat}>
-                        <img src={chatbotIcon} className="chat-popup-image" alt="Chat Icon" />
+                    <img src={chatbotIcon} className="chat-popup-image" alt="Chat Icon" />
+                    <div className="chat-popup-message">Message Us</div>
                 </div>
             )}
 
