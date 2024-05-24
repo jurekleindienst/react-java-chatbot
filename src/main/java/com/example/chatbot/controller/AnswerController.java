@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// Handle HTTP requests. Receive user input and call services to process input data.
 @RestController
 @RequestMapping("/api/answers")
 public class AnswerController {
@@ -19,6 +20,7 @@ public class AnswerController {
         this.answerService = answerService;
     }
 
+    // Retrieves the answer associated with a specific 'questionId'.
     @GetMapping("/question/{questionId}")
     public ResponseEntity<Answer> getAnswerByQuestionId(@PathVariable Long questionId) {
         Answer answer = answerService.getAnswerByQuestionId(questionId);

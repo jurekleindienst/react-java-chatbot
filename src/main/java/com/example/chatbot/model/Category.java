@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+// Entity to create "CATEGORIES" table with two columns (id, category) where 'id' is the primary key.
+// It defines a one-to-many relationship with the 'Question' entity, linking each category to multiple questions.
 @Entity
 @Table(name = "CATEGORIES")
 public class Category {

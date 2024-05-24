@@ -3,6 +3,9 @@ package com.example.chatbot.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+// Entity to create "QUESTIONS" table with columns (id, question) where 'id' is the primary key.
+// It defines a many-to-one relationship with 'Category' entity, linking each question to one category.
+// It defines a one-to-one relationship with 'Answer' entity, linking each question to its specific answer.
 @Entity
 @Table(name = "QUESTIONS")
 public class Question {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// Handle HTTP requests. Receive user input and call services to process input data.
 @RestController
 @RequestMapping("/api/questions")
 public class QuestionController {
@@ -21,12 +22,14 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
+    // Retrieves a list of questions associated with a specific 'categoryId' from 'QuestionService'.
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Question>> getQuestionsByCategory(@PathVariable Long categoryId) {
         List<Question> questions = questionService.getQuestionsByCategory(categoryId);
         return ResponseEntity.ok(questions);
     }
 
+    // Retrieves a question associated with a specific 'id' from 'QuestionService'.
     @GetMapping("/{id}")
     public ResponseEntity<Question> getQuestionById(@PathVariable Long id) {
         Question question = questionService.getQuestionById(id);

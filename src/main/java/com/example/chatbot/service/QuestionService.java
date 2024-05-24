@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Handles business logic (fetching data from the database through the repository layer).
 @Service
 public class QuestionService {
     private QuestionRepository questionRepository;
@@ -16,10 +17,12 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public List<Question> getQuestionsByCategory(Long category_id) {
-        return questionRepository.findByCategoryId(category_id);
+    // Retrieves a list of all categories' questions specified by 'categoryId'.
+    public List<Question> getQuestionsByCategory(Long categoryId) {
+        return questionRepository.findByCategoryId(categoryId);
     }
 
+    // Retrieves a specific question by its 'id'.
     public Question getQuestionById(Long id) {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Question not found"));
