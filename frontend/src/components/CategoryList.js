@@ -1,0 +1,1 @@
+// Displays a list of categories as clickable items
