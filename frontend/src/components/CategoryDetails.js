@@ -1,1 +1,0 @@
-// Displays detailed information about a selected category and lists related questions

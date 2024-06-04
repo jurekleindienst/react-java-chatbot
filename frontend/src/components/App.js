@@ -1,23 +1,29 @@
-import '../App.css';
+import React, {useState} from "react";
+import CategoryList from "../components/CategoryList";
+import QuestionList from "../components/QuestionList";
+import AnswerDisplay from "../components/AnswerDisplay";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+    const [selectedQuestionId, setSelectedQuestionId] = useState(null);
+
+    function handleSelectCategory(id) {
+      setSelectedCategoryId(id);
+      // Reset selectedQuestionId when new category is selected
+      setSelectedQuestionId(null);
+    }
+
+    function handleSelectQuestion(id) {
+      setSelectedQuestionId(id);
+    }
+
+    return (
+        <div className="App">
+            <CategoryList onSelectCategory={handleSelectCategory} />
+            {selectedQuestionId && (<QuestionList categoryId={selectedCategoryId} onSelectQuestion={handleSelectQuestion}/>)}
+            {selectedQuestionId && <AnswerDisplay questionId={selectedQuestionId} />}
+        </div>
+    )
 }
 
 export default App;
