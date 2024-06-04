@@ -4,10 +4,7 @@ import com.example.chatbot.model.Question;
 import com.example.chatbot.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,7 @@ public class QuestionController {
     }
 
     // Retrieves a list of questions associated with a specific 'categoryId' from 'QuestionService'.
+    @CrossOrigin
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Question>> getQuestionsByCategory(@PathVariable Long categoryId) {
         List<Question> questions = questionService.getQuestionsByCategory(categoryId);
@@ -30,6 +28,7 @@ public class QuestionController {
     }
 
     // Retrieves a question associated with a specific 'id' from 'QuestionService'.
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Question> getQuestionById(@PathVariable Long id) {
         Question question = questionService.getQuestionById(id);

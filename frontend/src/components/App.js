@@ -1,26 +1,26 @@
-import React, {useState} from "react";
-import CategoryList from "../components/CategoryList";
-import QuestionList from "../components/QuestionList";
-import AnswerDisplay from "../components/AnswerDisplay";
+import React, {useState} from 'react';
+import CategoryList from './CategoryList';
+import QuestionList from './QuestionList';
+import AnswerDisplay from './AnswerDisplay';
 
 function App() {
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
     const [selectedQuestionId, setSelectedQuestionId] = useState(null);
 
-    function handleSelectCategory(id) {
-      setSelectedCategoryId(id);
+    const handleSelectCategory = (categoryId) => {
+      setSelectedCategoryId(categoryId);
       // Reset selectedQuestionId when new category is selected
       setSelectedQuestionId(null);
     }
 
-    function handleSelectQuestion(id) {
-      setSelectedQuestionId(id);
+    const handleSelectQuestion = (questionId) => {
+      setSelectedQuestionId(questionId);
     }
 
     return (
-        <div className="App">
+        <div>
             <CategoryList onSelectCategory={handleSelectCategory} />
-            {selectedQuestionId && (<QuestionList categoryId={selectedCategoryId} onSelectQuestion={handleSelectQuestion}/>)}
+            {selectedCategoryId && <QuestionList categoryId={selectedCategoryId} onSelectQuestion={handleSelectQuestion}/>}
             {selectedQuestionId && <AnswerDisplay questionId={selectedQuestionId} />}
         </div>
     )

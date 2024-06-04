@@ -1,5 +1,5 @@
 // Displays a list of categories as clickable items
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect} from 'react';
 
 const CategoryList = ({onSelectCategory}) => {
     // categories: Current state
