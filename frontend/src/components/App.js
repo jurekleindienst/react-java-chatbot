@@ -1,29 +1,41 @@
 import React, {useState} from 'react';
 import CategoryList from './CategoryList';
 import QuestionList from './QuestionList';
-import AnswerDisplay from './AnswerDisplay';
 
 function App() {
-    const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-    const [selectedQuestionId, setSelectedQuestionId] = useState(null);
+    // Set and Save the ID of current selected category.
+    const [selectedCategoryId, setSelectedCategoryId] = useState(null)
+    // Set and Save the Name of current selected category
+    const [selectedCategoryName, setSelectedCategoryName] = useState("");
+    // Set and Save the current component to display.
+    const [currentView, setCurrentView] = useState('categoryList');
 
-    const handleSelectCategory = (categoryId) => {
+    // Set the categoryId and change the current view to display questions associated with the selected category.
+    const handleSelectCategory = (categoryId, categoryName) => {
       setSelectedCategoryId(categoryId);
-      // Reset selectedQuestionId when new category is selected
-      setSelectedQuestionId(null);
+      setSelectedCategoryName(categoryName)
+      setCurrentView('questionList')
     }
 
-    const handleSelectQuestion = (questionId) => {
-      setSelectedQuestionId(questionId);
+    // Reset the view back to the list of categories, allow to select a different category.
+    const handleBackToCategories = () => {
+        setCurrentView('categoryList');
+        setSelectedCategoryId(null);
     }
 
+    // Depending on the value of 'currentView', either the 'CategoryList' or the 'QuestionList' is rendered.
     return (
-        <div>
-            <CategoryList onSelectCategory={handleSelectCategory} />
-            {selectedCategoryId && <QuestionList categoryId={selectedCategoryId} onSelectQuestion={handleSelectQuestion}/>}
-            {selectedQuestionId && <AnswerDisplay questionId={selectedQuestionId} />}
+        <div className="app-container">
+            {currentView === 'categoryList' && <CategoryList onSelectCategory={handleSelectCategory} />}
+            {currentView === 'questionList' && selectedCategoryId && (
+                <div>
+                    {/* A back button, that allows navigating back to the category list from the questions view. */}
+                    <button onClick={handleBackToCategories}>Back to Categories</button>
+                    <QuestionList categoryId={selectedCategoryId} categoryName={selectedCategoryName}/>
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
 export default App;

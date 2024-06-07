@@ -2,8 +2,7 @@
 import React, {useState, useEffect} from 'react';
 
 const CategoryList = ({onSelectCategory}) => {
-    // categories: Current state
-    // setCategories: Update state
+    // Set and Save fetched categories
     const [categories, setCategories] = useState([]);
 
     // []: Reset everytime when re-rendered
@@ -14,10 +13,15 @@ const CategoryList = ({onSelectCategory}) => {
             .catch(error => console.error('Error fetching categories:', error));
     }, []);
 
+    // Map each category retrieved and create a button for each.
+    // Clicking the button 'onSelectCategory' is called with 'category.id' and 'category.category' (name),
+    // allowing the app to know which category was selected.
     return (
-        <div>
+        <div className="category-list-container">
             {categories.map((category) => (
-                <button key={category.id} onClick={() => onSelectCategory(category.id)}>
+                <button className="category-button"
+                        key={category.id}
+                        onClick={() => onSelectCategory(category.id, category.category)}>
                     {category.category}
                 </button>
             ))}
