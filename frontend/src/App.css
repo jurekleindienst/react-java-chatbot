@@ -6,6 +6,7 @@ App:
 Header:
 .back-to-categories-button
 .close-chatbot-button
+.close-chatbot-container
 
 CategoryList:
 .category-button (category button & text)
@@ -16,8 +17,9 @@ QuestionList:
 .answer-container (answer block & text)
 .question-button svg (transition to reset arrow back from pointing down)
 .rotate-arrow (rotate arrow by 90deg when question selected)
-.close-chatbot-button
-.close-chatbot-container
+
+Greeting:
+.greetings-container
 */
 
 body {
@@ -36,6 +38,8 @@ body {
     margin: 20px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
 /* Phone (Small Screen) */
@@ -51,10 +55,12 @@ body {
 
 .faq-container {
     width: 90%;
-    margin: 20px auto;
+    margin: 10px auto;
     background: #FFFFFF;
     border-radius: 10px;
     overflow: hidden;
+    transition: opacity 1000ms ease-in-out;
+    opacity: 1;
 }
 
 /* Header */
@@ -64,6 +70,7 @@ body {
     align-items: center;
     padding: 10px;
     position: relative;
+    margin-bottom: 0;
 }
 
 .back-to-categories-button {
@@ -76,6 +83,8 @@ body {
     display: flex;
     padding: 10px;
     border: none;
+    opacity: 1;
+    transition: opacity 300ms ease-in-out;
 }
 
 .close-chatbot-container {
@@ -172,4 +181,51 @@ body {
 .rotate-arrow {
     transform: rotate(90deg);
     transition: transform 0.2s ease-in-out;
+}
+
+/* Greeting */
+.greetings-container {
+    opacity: 1;
+    transition: opacity 1000ms ease-in-out;
+}
+
+.hi-there {
+    font-family: Montserrat, sans-serif;
+    font-size: 28px;
+    padding: 10px;
+    margin-top: 0;
+    margin-left: 20px;
+    margin-bottom: 0;
+    max-width: fit-content;
+}
+
+.use-navigation {
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    margin-top: 0;
+    margin-left: 20px;
+    max-width: fit-content;
+    border-radius: 0 10px 10px 10px;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    background-color: #FFFFFF;
+    color: white;
+    text-align: center;
+    margin-top: auto;
+}
+
+.message-button {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    min-width: 100%;
+    background-color: #0077BD;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 10px;
 }

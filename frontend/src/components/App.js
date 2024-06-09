@@ -9,23 +9,38 @@ function App() {
     const [selectedCategoryName, setSelectedCategoryName] = useState("");
     // Set and Save the current component to display.
     const [currentView, setCurrentView] = useState('categoryList');
+    // Set and Save the current opacity
+    const [opacity, setOpacity] = useState(1);
+    // Set and Save the current status of greeting
+    const [showGreetings, setShowGreetings] = useState(true);
 
     // Set the categoryId and change the current view to display questions associated with the selected category.
     const handleSelectCategory = (categoryId, categoryName) => {
-      setSelectedCategoryId(categoryId);
-      setSelectedCategoryName(categoryName)
-      setCurrentView('questionList')
+        setOpacity(0); // Start by fading out
+        setTimeout(() => {
+            setSelectedCategoryId(categoryId);
+            setSelectedCategoryName(categoryName);
+            setCurrentView('questionList');
+            setShowGreetings(false);
+            setOpacity(1); // Fade in after transition duration
+        }, 1000)
     }
 
     // Reset the view back to the list of categories, allow to select a different category.
     const handleBackToCategories = () => {
-        setCurrentView('categoryList');
-        setSelectedCategoryId(null);
+        setOpacity(0); // Start by fading out
+        setTimeout(() => {
+            setCurrentView('categoryList');
+            setSelectedCategoryId(null);
+            setOpacity(1);
+            setShowGreetings(true);
+        }, 1000)
     }
 
     // Depending on the value of 'currentView', either the 'CategoryList' or the 'QuestionList' is rendered.
     return (
         <div className="app-container">
+            {/* Header */}
             <div className="header">
                 {currentView === 'questionList' && selectedCategoryId && (
                     <div className="back-to-categories-container">
@@ -45,15 +60,29 @@ function App() {
                         </svg>
                     </button>
                 </div>
-
             </div>
-            <div className="faq-container">
+
+            {/* Greeting */}
+            {showGreetings && (
+                <div className="greetings-container" style={{ opacity }}>
+                    <p className="hi-there">Hi there! 👋</p>
+                    <p className="use-navigation">Please use the navigation below.</p>
+                </div>
+            )}
+
+            {/* FAQ */}
+            <div className="faq-container" style={{ opacity }}>
                 {currentView === 'categoryList' && <CategoryList onSelectCategory={handleSelectCategory} />}
                 {currentView === 'questionList' && selectedCategoryId && (
                     <div>
                         <QuestionList categoryId={selectedCategoryId} categoryName={selectedCategoryName}/>
                     </div>
                 )}
+            </div>
+
+            {/* Footer */}
+            <div className="footer">
+                <button className="message-button">Send us a message</button>
             </div>
         </div>
     );
