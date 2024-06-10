@@ -14,12 +14,16 @@ function App() {
     const [currentView, setCurrentView] = useState('categoryList');
     // Set and Save the opacity (of (*) faq-container, greeting and category descriptions) - used for transitions (initialState: 1 - (*)-components shown).
     const [opacity, setOpacity] = useState(1);
-    // Set and Save the opacity of the email form - used for transitions (initialState: 0 - email form hidden).
+    // Set and Save the opacity of the email form - used for transitions (initialState: 0 - email form hidden at render).
     const [emailFormOpacity, setEmailFormOpacity] = useState(0);
-    // Set and Save the current status of the email form (initialState: false - not in email form view).
+    // Set and Save the current status of the email form (initialState: false - not in email form view at render).
     const [showEmailForm, setShowEmailForm] = useState(false);
-    // Set and Save the current status of the greeting (initialState: true - greeting messages are shown).
+    // Set and Save the current status of the greeting (initialState: true - greeting messages are shown at render).
     const [showGreetings, setShowGreetings] = useState(true);
+    // Set and Save the current app visibility status (initialState: false - app is not seen at render)
+    const [isAppVisible, setIsAppVisible] = useState(false);
+    // Set and Save the open icon visibility status (initialState: true - icon is seen at render)
+    const [showOpenIcon, setShowOpenIcon] = useState(true);
 
     const backButtonSvg = (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -41,11 +45,11 @@ function App() {
 
     // Map the category ID with their description.
     const categoryDescriptions = {
-        1: "Find out how to book your stay with us, including reservation policies and rates.",
-        2: "Learn about the site rules, pet policies, and safety guidelines to ensure a pleasant stay.",
-        3: "Explore the amenities and services available at our campsite, from electric hookups to laundry facilities.",
-        4: "Your health and safety are our top priorities. Read our health protocols and emergency procedures.",
-        5: "Discover nearby attractions, trails, and activities to enhance your visit."
+        1: "Find key details on booking procedures, payment methods, and reservation policies here.",
+        2: "Quickly access our campsite rules, pet policies, and safety guidelines.",
+        3: "Explore amenities and services available at our campsite from utilities to fun activities.",
+        4: "Learn about our health protocols and safety measures to ensure your well-being during your stay.",
+        5: "Get tips on local attractions and activities to enhance your experience in our region."
     }
 
     // Receive categoryId, categoryName parameter values from CategoryList component.
@@ -96,83 +100,107 @@ function App() {
         setCurrentView('emailView')
     }
 
+    // Clicking on the close button.
+    const handleCloseClick = () => {
+        setIsAppVisible(false);
+        setShowOpenIcon(true);
+    }
 
+    // Clicking on the Open Icon (Ask a question!).
+    const handleOpenClick = () => {
+        setIsAppVisible(true);
+        setShowOpenIcon(false);
+    }
 
     // Depending on the value of 'currentView', either the 'CategoryList' or the 'QuestionList' is rendered.
     return (
-        <div className={`app-container ${(currentView === 'questionList' || currentView === 'emailView') ? 'adjust-height' : ''}`}>
-            {/* Header */}
-            <div className="header">
-                {/* Back button - allows navigating back to the category list from the question list view or email form view. */}
-                {(currentView === 'questionList' || currentView === 'emailView') && (
-                    <div className="back-to-categories-container">
-                        <button className="back-to-categories-button" onClick={handleBackToCategories}>
-                            {backButtonSvg}
+        <div>
+            {showOpenIcon && (
+                <div className="open-icon-container" onClick={handleOpenClick}>
+                    <button className="open-icon-button">Ask a question!</button>
+                </div>
+            )}
+
+            {isAppVisible && (
+                <div className={`app-container ${(currentView === 'questionList' || currentView === 'emailView') ? 'adjust-height' : ''}`}>
+                    {/* Header */}
+                    <div className="header">
+                        {/* Back button - allows navigating back to the category list from the question list view or email form view. */}
+                        {(currentView === 'questionList' || currentView === 'emailView') && (
+                            <div className="back-to-categories-container">
+                                <button className="back-to-categories-button" onClick={handleBackToCategories}>
+                                    {backButtonSvg}
+                                </button>
+                            </div>
+                        )}
+
+                        {/* Logo */}
+                        <div className="logo-container">
+                            <img src="/logo_transparent.png" alt="Logo" className="logo"/>
+                        </div>
+
+                        {/* Close button */}
+                        <div className="close-chatbot-container">
+                            <button className="close-chatbot-button" onClick={handleCloseClick}>
+                                {closeButtonSvg}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Greeting */}
+                    <div className="greetings-container" style={{ opacity }}>
+                        {showGreetings && (
+                            <div>
+                                <p className="hi-there">Hi there! 👋</p>
+                                <p className="welcome">Welcome to Camping Šobec!</p>
+                                <p className="information">
+                                    Click on a category to view frequently asked questions and their answers.
+                                    If you have specific questions, don't hesitate to directly send us a message!
+                                </p>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Category Description */}
+                    <div className="category-desc-container" style={{ opacity }}>
+                        {currentView === 'questionList' && (
+                            <div className="category-desc">
+                                <h1>{selectedCategoryName}</h1>
+                                <p>{selectedCategoryDesc}</p>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Email Form */}
+                    <div className="email-form-container" style={{ opacity: emailFormOpacity, transition: 'opacity 1s ease'}}>
+                        {currentView === 'emailView' && showEmailForm && (
+                            <div>
+                                <p>How can we help you?</p>
+                                <EmailForm closeForm={handleCloseEmailForm} />
+                            </div>
+
+                        )}
+                    </div>
+
+                    {/* FAQ */}
+                    <div className="faq-container" style={{ opacity }}>
+                        {currentView === 'categoryList' && <CategoryList onSelectCategory={handleSelectCategory} />}
+                        {currentView === 'questionList' && selectedCategoryId && (
+                            <div>
+                                <QuestionList categoryId={selectedCategoryId}/>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Footer */}
+                    <div className="footer">
+                        <button className="message-button" onClick={handleSendMessageClick}>
+                            Send us a message
+                            {sendSvg}
                         </button>
                     </div>
-                )}
-
-                {/* Logo */}
-                <div className="logo-container">
-                    <img src="/logo_transparent.png" alt="Logo" className="logo"/>
                 </div>
-
-                {/* Close button */}
-                <div className="close-chatbot-container">
-                    <button className="close-chatbot-button">
-                        {closeButtonSvg}
-                    </button>
-                </div>
-            </div>
-
-            {/* Greeting */}
-            <div className="greetings-container" style={{ opacity }}>
-                {showGreetings && (
-                    <div>
-                        <p className="hi-there">Hi there! 👋</p>
-                        <p className="use-navigation">Please use the navigation below.</p>
-                    </div>
-                )}
-            </div>
-
-            {/* Category Description */}
-            <div className="category-desc-container" style={{ opacity }}>
-                {currentView === 'questionList' && (
-                    <div className="category-desc">
-                        <h1>{selectedCategoryName}</h1>
-                        <p>{selectedCategoryDesc}</p>
-                    </div>
-                )}
-            </div>
-
-            {/* Email Form */}
-            <div className="email-form-container" style={{ opacity: emailFormOpacity, transition: 'opacity 1s ease'}}>
-                {currentView === 'emailView' && showEmailForm && (
-                    <div>
-                        <p>How can we help you?</p>
-                        <EmailForm closeForm={handleCloseEmailForm} />
-                    </div>
-
-                )}
-            </div>
-
-            {/* FAQ */}
-            <div className="faq-container" style={{ opacity }}>
-                {currentView === 'categoryList' && <CategoryList onSelectCategory={handleSelectCategory} />}
-                {currentView === 'questionList' && selectedCategoryId && (
-                    <div>
-                        <QuestionList categoryId={selectedCategoryId}/>
-                    </div>
-                )}
-            </div>
-
-            {/* Footer */}
-            <div className="footer">
-                <button className="message-button" onClick={handleSendMessageClick}>
-                    Send us a message
-                    {sendSvg}
-                </button>
-            </div>
+            )}
         </div>
     );
 }

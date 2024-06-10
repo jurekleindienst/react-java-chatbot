@@ -241,13 +241,19 @@ body {
     margin-bottom: 0;
 }
 
-.use-navigation {
+.welcome {
     font-family: Montserrat, sans-serif;
     font-size: 16px;
     padding-bottom: 10px;
-    margin-top: 0;
-    margin-left: 40px;
-    margin-bottom: 0;
+    margin: 0 40px;
+    border-radius: 0 10px 10px 10px;
+}
+
+.information {
+    font-family: Montserrat, sans-serif;
+    font-size: 12px;
+    padding-bottom: 10px;
+    margin: 0 40px;
     border-radius: 0 10px 10px 10px;
 }
 
@@ -292,7 +298,7 @@ body {
 .category-desc h1 {
     font-family: Montserrat, sans-serif;
     font-weight: normal;
-    font-size: 28px;
+    font-size: 24px;
     color: #0077BD;
     padding-bottom: 10px;
     margin-top: 0;
@@ -302,7 +308,7 @@ body {
 
 .category-desc p {
     font-family: Montserrat, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     padding-bottom: 10px;
     margin: 0 20px;
     border-radius: 0 10px 10px 10px;
@@ -373,3 +379,19 @@ body {
     background-color: rgba(0, 119, 189, 0.1);
 }
 
+/* Open Icon/Button */
+.open-icon-button {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    background-color: #0077BD;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 8px 8px 0 8px;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
