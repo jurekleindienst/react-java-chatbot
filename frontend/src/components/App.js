@@ -6,20 +6,40 @@ import EmailForm from "./EmailForm";
 function App() {
     // Set and Save the ID of current selected category.
     const [selectedCategoryId, setSelectedCategoryId] = useState(null)
-    // Set and Save the Name of current selected category
+    // Set and Save the Name of current selected category.
     const [selectedCategoryName, setSelectedCategoryName] = useState("");
-    // Set and Save the current category description
+    // Set and Save the Description of current selected category.
     const [selectedCategoryDesc, setSelectedCategoryDesc] = useState("");
-    // Set and Save the current component to display.
+    // Set and Save the component view we are currently in.
     const [currentView, setCurrentView] = useState('categoryList');
-    // Set and Save the current opacity
+    // Set and Save the opacity (of (*) faq-container, greeting and category descriptions) - used for transitions (initialState: 1 - (*)-components shown).
     const [opacity, setOpacity] = useState(1);
-    // Set and Save the current status of the greeting
-    const [showGreetings, setShowGreetings] = useState(true);
-    // Set and Save the current status of the email form
+    // Set and Save the opacity of the email form - used for transitions (initialState: 0 - email form hidden).
+    const [emailFormOpacity, setEmailFormOpacity] = useState(0);
+    // Set and Save the current status of the email form (initialState: false - not in email form view).
     const [showEmailForm, setShowEmailForm] = useState(false);
+    // Set and Save the current status of the greeting (initialState: true - greeting messages are shown).
+    const [showGreetings, setShowGreetings] = useState(true);
 
-    // Map categoryId with their descriptions
+    const backButtonSvg = (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="m14 18-6-6 6-6"></path>
+        </svg>
+    );
+
+    const closeButtonSvg = (
+        <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10 L30 30 M30 10 L10 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+    );
+
+    const sendSvg = (
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none" viewBox="0 0 17 16" color="linkColor">
+            <path fill="currentColor" fill-rule="evenodd" d="m4.563 14.605 9.356-5.402c1-.577 1-2.02 0-2.598L4.563 1.203a1.5 1.5 0 0 0-2.25 1.3v10.803a1.5 1.5 0 0 0 2.25 1.3M6.51 8.387 2.313 9.512V6.297L6.51 7.42c.494.133.494.834 0 .966" clip-rule="evenodd"></path>
+        </svg>
+    );
+
+    // Map the category ID with their description.
     const categoryDescriptions = {
         1: "Find out how to book your stay with us, including reservation policies and rates.",
         2: "Learn about the site rules, pet policies, and safety guidelines to ensure a pleasant stay.",
@@ -28,63 +48,79 @@ function App() {
         5: "Discover nearby attractions, trails, and activities to enhance your visit."
     }
 
-    // Set the categoryId and change the current view to display questions associated with the selected category.
+    // Receive categoryId, categoryName parameter values from CategoryList component.
+    // Make the transition to question list view.
     const handleSelectCategory = (categoryId, categoryName) => {
         const categoryDesc = categoryDescriptions[categoryId];
-        setOpacity(0); // Start by fading out
+        setOpacity(0); // Start by fading out (of faq-container (category list view)).
         setTimeout(() => {
             setSelectedCategoryId(categoryId);
             setSelectedCategoryName(categoryName);
             setSelectedCategoryDesc(categoryDesc);
             setCurrentView('questionList');
             setShowGreetings(false);
-            setOpacity(1); // Fade in after transition duration
+            setOpacity(1); // Fade in after transition duration.
         }, 1000)
     }
 
     // Reset the view back to the list of categories, allow to select a different category.
     const handleBackToCategories = () => {
-        setOpacity(0); // Start by fading out
+        setOpacity(0); // Start by fading out (of faq-container (question list view)).
+        setEmailFormOpacity(0);
         setTimeout(() => {
             setCurrentView('categoryList');
             setSelectedCategoryId(null);
-            setOpacity(1);
             setShowEmailForm(false);
             setShowGreetings(true);
+            setOpacity(1);
         }, 1000)
     }
 
+    // Make the transition to email view.
     const handleSendMessageClick = () => {
-        setShowEmailForm(true);
-        setCurrentView('emailView');
+        setOpacity(0); // Start by fading out (of faq-container (category/question list view)).
+        setEmailFormOpacity(0);
+        setTimeout(() => {
+            setCurrentView('emailView');
+            setShowEmailForm(true);
+            setShowGreetings(false);
+            setEmailFormOpacity(1); // Fade in the email form view.
+        }, 1000)
     }
 
+    // Transition from email form view.
     const handleCloseEmailForm = () => {
+        setEmailFormOpacity(0);
         setShowEmailForm(false);
-        setCurrentView('emailView');
+        setShowGreetings(false);
+        setCurrentView('emailView')
     }
+
+
 
     // Depending on the value of 'currentView', either the 'CategoryList' or the 'QuestionList' is rendered.
     return (
         <div className={`app-container ${(currentView === 'questionList' || currentView === 'emailView') ? 'adjust-height' : ''}`}>
             {/* Header */}
             <div className="header">
+                {/* Back button - allows navigating back to the category list from the question list view or email form view. */}
                 {(currentView === 'questionList' || currentView === 'emailView') && (
                     <div className="back-to-categories-container">
-                        {/* A back button, that allows navigating back to the category list from the questions view. */}
                         <button className="back-to-categories-button" onClick={handleBackToCategories}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="m14 18-6-6 6-6"></path>
-                            </svg>
+                            {backButtonSvg}
                         </button>
                     </div>
                 )}
+
+                {/* Logo */}
+                <div className="logo-container">
+                    <img src="/logo_transparent.png" alt="Logo" className="logo"/>
+                </div>
+
+                {/* Close button */}
                 <div className="close-chatbot-container">
-                    {/* Button to close the chatbot */}
                     <button className="close-chatbot-button">
-                        <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 10 L30 30 M30 10 L10 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                        </svg>
+                        {closeButtonSvg}
                     </button>
                 </div>
             </div>
@@ -109,6 +145,17 @@ function App() {
                 )}
             </div>
 
+            {/* Email Form */}
+            <div className="email-form-container" style={{ opacity: emailFormOpacity, transition: 'opacity 1s ease'}}>
+                {currentView === 'emailView' && showEmailForm && (
+                    <div>
+                        <p>How can we help you?</p>
+                        <EmailForm closeForm={handleCloseEmailForm} />
+                    </div>
+
+                )}
+            </div>
+
             {/* FAQ */}
             <div className="faq-container" style={{ opacity }}>
                 {currentView === 'categoryList' && <CategoryList onSelectCategory={handleSelectCategory} />}
@@ -123,9 +170,7 @@ function App() {
             <div className="footer">
                 <button className="message-button" onClick={handleSendMessageClick}>
                     Send us a message
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none" viewBox="0 0 17 16" color="linkColor">
-                        <path fill="currentColor" fill-rule="evenodd" d="m4.563 14.605 9.356-5.402c1-.577 1-2.02 0-2.598L4.563 1.203a1.5 1.5 0 0 0-2.25 1.3v10.803a1.5 1.5 0 0 0 2.25 1.3M6.51 8.387 2.313 9.512V6.297L6.51 7.42c.494.133.494.834 0 .966" clip-rule="evenodd"></path>
-                    </svg>
+                    {sendSvg}
                 </button>
             </div>
         </div>

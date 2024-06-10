@@ -29,10 +29,14 @@ Footer:
 .footer
 .message-button
 
+EmailForm:
+.email-form-container
+.email-form
+
 */
 
 body {
-    background-color: #FFFFFF;
+    background-color: #e3e3e3;
 }
 
 /* App */
@@ -50,7 +54,7 @@ body {
     transition: height 0.3s ease;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     /* If in category view, use default height */
     .app-container {
         height: 600px;
@@ -63,10 +67,10 @@ body {
 }
 
 /* Phone (Small Screen) */
-@media (max-width: 768px) {
+@media (max-width: 769px) {
     .app-container {
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         margin: 0;
         right: 0;
         bottom: 0;
@@ -91,9 +95,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
     position: relative;
-    margin-bottom: 0;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .back-to-categories-button {
@@ -131,6 +135,20 @@ body {
 .back-to-categories-button:hover, .close-chatbot-button:hover {
     background-color: rgba(0, 119, 189, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease
+}
+
+.logo-container {
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    display: flex;
+    justify-content: center;
+    background-color: #0077BD;
+}
+
+.logo {
+    width: 65px;
+    height: 65px;
 }
 
 /* CategoryList */
@@ -273,7 +291,7 @@ body {
 
 .category-desc h1 {
     font-family: Montserrat, sans-serif;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 28px;
     color: #0077BD;
     padding-bottom: 10px;
@@ -289,3 +307,69 @@ body {
     margin: 0 20px;
     border-radius: 0 10px 10px 10px;
 }
+
+/* EmailForm */
+
+.email-form-container {
+    transition: opacity 1s ease-in-out;
+}
+
+.email-form-container p {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    padding-left: 20px;
+}
+
+.email-form {
+    margin: 20px;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid #DCE2E1;
+}
+
+.email-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.email-form input[type="email"], .email-form textarea {
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    margin: 10px;
+    padding-left: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #DCE2E1;
+}
+
+.email-form textarea {
+    border: 1px solid #DCE2E1;
+    padding: 10px;
+    border-radius: 10px;
+    height: 100px;
+    resize: none;
+}
+
+.email-form button {
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+    padding: 7px 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 7px;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.email-form button:hover {
+    color: #0077BD;
+    background-color: rgba(0, 119, 189, 0.1);
+}
+
