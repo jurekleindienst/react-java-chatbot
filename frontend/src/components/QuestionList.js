@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const QuestionList = ({categoryId}) => {
+const QuestionList = ({categoryId, categoryName, categoryDesc}) => {
     // Set and Save questions of currently selected category.
     const [questions, setQuestions] = useState([]);
     // Set and Save current active question => which answer should be displayed.

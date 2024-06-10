@@ -20,6 +20,15 @@ QuestionList:
 
 Greeting:
 .greetings-container
+
+Category Description:
+.category-desc-container
+.category-desc
+
+Footer:
+.footer
+.message-button
+
 */
 
 body {
@@ -32,35 +41,49 @@ body {
     right: 0;
     bottom: 0;
     width: 400px;
-    height: 90%;
     background-color: #F7F3F1;
     border-radius: 10px;
     margin: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+    transition: height 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    /* If in category view, use default height */
+    .app-container {
+        height: 600px;
+    }
+
+    /* If in question view make the container higher */
+    .app-container.adjust-height {
+        height: 650px;
+    }
 }
 
 /* Phone (Small Screen) */
 @media (max-width: 768px) {
     .app-container {
+        width: 100vw;
+        height: 100vh;
         margin: 0;
-        width: 100%;
-        height: 100%;
         right: 0;
         bottom: 0;
+        transition: none;
     }
 }
 
 .faq-container {
+    border: 1px solid #DCE2E1;
     width: 90%;
     margin: 10px auto;
     background: #FFFFFF;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: auto;
     transition: opacity 1000ms ease-in-out;
     opacity: 1;
+
 }
 
 /* Header */
@@ -185,27 +208,28 @@ body {
 
 /* Greeting */
 .greetings-container {
-    opacity: 1;
     transition: opacity 1000ms ease-in-out;
+    opacity: 1;
 }
 
 .hi-there {
     font-family: Montserrat, sans-serif;
+    font-weight: bold;
     font-size: 28px;
-    padding: 10px;
+    color: #0077BD;
+    padding-bottom: 10px;
     margin-top: 0;
-    margin-left: 20px;
+    margin-left: 40px;
     margin-bottom: 0;
-    max-width: fit-content;
 }
 
 .use-navigation {
     font-family: Montserrat, sans-serif;
-    font-size: 14px;
-    padding: 10px;
+    font-size: 16px;
+    padding-bottom: 10px;
     margin-top: 0;
-    margin-left: 20px;
-    max-width: fit-content;
+    margin-left: 40px;
+    margin-bottom: 0;
     border-radius: 0 10px 10px 10px;
 }
 
@@ -216,16 +240,52 @@ body {
     color: white;
     text-align: center;
     margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #DCE2E1;
 }
 
 .message-button {
     font-family: Montserrat, sans-serif;
     font-size: 16px;
-    min-width: 100%;
+    min-width: 60%;
     background-color: #0077BD;
     border: none;
     color: #FFFFFF;
     border-radius: 8px;
     cursor: pointer;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.message-button:hover {
+    background-color: rgba(0, 119, 189, 0.8);
+}
+
+/* Category Description */
+.category-desc-container {
+    transition: opacity 1000ms ease-in-out;
+    opacity: 1;
+}
+
+.category-desc h1 {
+    font-family: Montserrat, sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    color: #0077BD;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+
+.category-desc p {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin: 0 20px;
+    border-radius: 0 10px 10px 10px;
 }
