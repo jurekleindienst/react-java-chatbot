@@ -116,6 +116,8 @@ body {
 }
 
 .close-chatbot-container {
+    height: 45px;
+    width: 45px;
     margin-left: auto;
 }
 
