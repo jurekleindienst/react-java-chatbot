@@ -123,7 +123,7 @@ body {
     background-color: transparent;
     height: 45px;
     width: 45px;
-    font-size: 28px;
+    font-size: 24px;
     color: #0077BD;
     border-radius: 8px;
     cursor: pointer;
@@ -131,6 +131,7 @@ body {
     align-items: center;
     justify-content: center;
     border: none;
+    opacity: 1;
 }
 
 .back-to-categories-button:hover, .close-chatbot-button:hover {
