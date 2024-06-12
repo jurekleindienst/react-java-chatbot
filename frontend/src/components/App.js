@@ -155,7 +155,7 @@ function App() {
                                 <p className="welcome">Welcome to Camping Šobec!</p>
                                 <p className="information">
                                     Click on a category to view frequently asked questions and their answers.
-                                    If you have specific questions, don't hesitate to directly send us a message!
+                                    If you have specific questions, don't hesitate to send us a message!
                                 </p>
                             </div>
                         )}

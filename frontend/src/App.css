@@ -282,11 +282,11 @@ body {
     padding: 10px;
     display: flex;
     justify-content: space-between;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.2s ease, color 0.3s ease;
 }
 
 .message-button:hover {
-    background-color: rgba(0, 119, 189, 0.8);
+    background-color: #FF4E02
 }
 
 /* Category Description */
@@ -315,7 +315,6 @@ body {
 }
 
 /* EmailForm */
-
 .email-form-container {
     transition: opacity 1s ease-in-out;
 }
@@ -394,4 +393,8 @@ body {
     cursor: pointer;
     padding: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.open-icon-button:hover {
+    background-color: #FF4E02;
 }
