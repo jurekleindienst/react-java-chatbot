@@ -147,7 +147,9 @@ function App() {
                         {/* Close button */}
                         <div className="close-chatbot-container">
                             <button className="close-chatbot-button" onClick={handleCloseClick}>
-                                <span>&times;</span>
+                                <svg width="24" height="24" viewBox="0 0 40 40" fill="#0077BD" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 10 L30 30 M30 10 L10 30" stroke="#0077BD" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
