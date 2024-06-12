@@ -34,6 +34,11 @@ EmailForm:
 .email-form
 
 */
+body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
 
 /* App */
 .app-container {
@@ -227,7 +232,6 @@ EmailForm:
 }
 
 .hi-there {
-    font-family: Montserrat, sans-serif;
     font-weight: bold;
     font-size: 28px;
     color: #0077BD;
@@ -238,7 +242,6 @@ EmailForm:
 }
 
 .welcome {
-    font-family: Montserrat, sans-serif;
     font-size: 16px;
     padding-bottom: 10px;
     margin: 0 40px;
