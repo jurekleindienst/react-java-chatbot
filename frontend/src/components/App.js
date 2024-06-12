@@ -20,10 +20,15 @@ function App() {
     const [showEmailForm, setShowEmailForm] = useState(false);
     // Set and Save the current status of the greeting (initialState: true - greeting messages are shown at render).
     const [showGreetings, setShowGreetings] = useState(true);
+
+
+    // Check if on Mobile (for open button visibility).
+    const isMobileScreen = () => window.innerWidth <= 769;
     // Set and Save the current app visibility status (initialState: false - app is not seen at render)
-    const [isAppVisible, setIsAppVisible] = useState(false);
+    const [isAppVisible, setIsAppVisible] = useState(!isMobileScreen());
     // Set and Save the open icon visibility status (initialState: true - icon is seen at render)
-    const [showOpenIcon, setShowOpenIcon] = useState(true);
+    const [showOpenIcon, setShowOpenIcon] = useState(isMobileScreen);
+
 
     const backButtonSvg = (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
